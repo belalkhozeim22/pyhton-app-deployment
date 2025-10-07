@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-microservice
+  namespace: microservice
+  labels:
+    app: python-microservice
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: python-microservice
+  template:
+    metadata:
+      labels:
+        app: python-microservice
+    spec:
+      imagePullSecrets:
+        - name: gcr-json-key
+      containers:
+        - name: python-microservice
+          image: gcr.io/theta-ember-474415-r8/python-microservice:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5000
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 30
+            periodSeconds: 30
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"

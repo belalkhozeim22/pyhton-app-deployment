@@ -1,0 +1,4 @@
+.terraform/
+infrastructure/.terraform/
+infrastructure/.terraform.lock.hcl
+infrastructure/k8s/key.json
