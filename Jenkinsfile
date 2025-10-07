@@ -32,7 +32,7 @@ pipeline {
 
             echo "Building Docker image..."
             docker build -t ${IMAGE_NAME}:latest .
-            GCR_IMAGE=gcr.io/${PROJECT_ID}/${IMAGE_NAME}:${BUILD_NUMBER}
+            GCR_IMAGE=gcr.io/theta-ember-474415-r8/python-microservice:${BUILD_NUMBER}
             echo "Tagging and pushing as ${GCR_IMAGE}"
             docker tag ${IMAGE_NAME}:latest ${GCR_IMAGE}
             docker push ${GCR_IMAGE}
