@@ -31,12 +31,13 @@ pipeline {
             gcloud auth configure-docker --quiet
 
             echo "Building Docker image..."
-            docker build -t ${IMAGE_NAME}:latest .
-
+            sudo docker build -t ${IMAGE_NAME}:latest .
             GCR_IMAGE=gcr.io/${PROJECT_ID}/${IMAGE_NAME}:${BUILD_NUMBER}
             echo "Tagging and pushing as ${GCR_IMAGE}"
-            docker tag ${IMAGE_NAME}:latest ${GCR_IMAGE}
-            docker push ${GCR_IMAGE}
+            sudo docker tag ${IMAGE_NAME}:latest ${GCR_IMAGE}
+            sudo docker push ${GCR_IMAGE}
+
+
 
             # persist image name for later stage
             echo ${GCR_IMAGE} > image-url.txt
