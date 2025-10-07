@@ -72,12 +72,11 @@ pipeline {
   }
 
   post {
-  success {
-    sh 'echo "Build & deploy succeeded. Image: $(cat image-url.txt)"'
+    success {
+      echo "Build & deploy succeeded. Image: $(cat image-url.txt)"
+    }
+    failure {
+      echo "Build or deployment failed. Check console output."
+    }
   }
-  failure {
-    echo "Build or deployment failed. Check console output."
-  }
-}
-
 }
