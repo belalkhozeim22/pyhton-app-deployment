@@ -57,10 +57,6 @@ pipeline {
             echo "Fetching GKE credentials..."
             gcloud container clusters get-credentials ${CLUSTER_NAME} --zone ${ZONE} --project ${PROJECT_ID}
 
-            # update deployment manifest with the pushed image
-            GCR_IMAGE=$(cat image-url.txt)
-            cp infra/k8s/deployment.yaml infra/k8s/deployment-for-ci.yaml
-            sed -i "s|gcr.io/<PROJECT_ID>/python-microservice:latest|${GCR_IMAGE}|g" infra/k8s/deployment-for-ci.yaml
 
             kubectl apply -f infrastructure/k8s/namespace.yaml
             kubectl apply -f infrastructure/k8s/deployment.yaml
