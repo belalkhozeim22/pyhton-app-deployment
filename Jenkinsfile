@@ -72,11 +72,16 @@ pipeline {
   }
 
   post {
-    success {
-      echo "Build & deploy succeeded. Image: $(cat image-url.txt)"
+        success {
+            script {
+                def image = readFile('image-url.txt').trim()
+                echo "Build & deploy succeeded. Image: ${image}"
+            }
+        }
+        failure {
+            mail to: 'belalkhozeim22@gmail.com',
+                 subject: "Build failed: ${env.JOB_NAME} ${env.BUILD_NUMBER}",
+                 body: "Check the Jenkins console output"
+        }
     }
-    failure {
-      echo "Build or deployment failed. Check console output."
-    }
-  }
 }
