@@ -80,7 +80,7 @@ echo "4️⃣ Run the pipeline to build → push → deploy automatically"
 kubectl get pods -A
 kubectl get svc -A
 
-echo "🎯 Deployment Completed Successfully!"
+echo " Deployment Completed Successfully!"
 echo "App running on: http://LOADBALANCER_EXTERNAL_IP:8080"
 
 
