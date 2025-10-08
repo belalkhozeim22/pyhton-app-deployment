@@ -62,6 +62,8 @@ pipeline {
             kubectl apply -f infrastructure/k8s/namespace.yaml
             kubectl apply -f infrastructure/k8s/deployment.yaml
             kubectl apply -f infrastructure/k8s/service.yaml
+            kubectl apply -f infrastructure/k8s/servicemonitor.yaml
+            kubectl apply -f infrastructure/k8s/grafana-service.yaml
           '''
         }
       }

@@ -1,0 +1,18 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: python-microservice-sm
+  namespace: monitoring
+  labels:
+    release: kube-prom-stack
+spec:
+  selector:
+    matchLabels:
+      app: python-microservice
+  namespaceSelector:
+    matchNames:
+      - microservice
+  endpoints:
+    - port: http           
+      path: /metrics
+      interval: 15s
